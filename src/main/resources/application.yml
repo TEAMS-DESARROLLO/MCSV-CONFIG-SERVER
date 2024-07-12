@@ -19,7 +19,7 @@ spring:
                     
                     username: 'crojasadicse'
 
-                    password: ${{MY_SECRET}}
+                    password: ${MY_SECRET}
 
                     clone-on-start: true
 
