@@ -13,14 +13,7 @@ spring:
                 service-id: mcsv-config-server 
             
             server:
-                # git:
-                    # uri: https://github.com/SIAT-MPM/configuracion_servicios.git
-                    # uri: https://github.com/MYCLOUD2-DEVELOPER/file_config.git
-                    
-                 
-                    # clone-on-start: true
-
-                # la rama de git
+         
                 default-label: master
             
 eureka:
