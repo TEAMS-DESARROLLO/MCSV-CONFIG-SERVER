@@ -15,7 +15,7 @@ spring:
             server:
                 git:
                     # uri: https://github.com/SIAT-MPM/configuracion_servicios.git
-                    uri: https://github.com/MYCLOUD2-DEVELOPER/file_config.git
+                    uri: https://github.com/TEAMS-DESARROLLO/file_config.git
                     
                     username: 'crojasadicse'
 
