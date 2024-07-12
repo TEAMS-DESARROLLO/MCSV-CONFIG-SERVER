@@ -18,7 +18,7 @@ spring:
                     uri: https://github.com/MYCLOUD2-DEVELOPER/file_config.git
                     
                     username: 'crojasadicse'
-                    password: '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'
+                    password: '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'
                     clone-on-start: true
 
                 # la rama de git
