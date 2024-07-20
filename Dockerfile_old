@@ -1,0 +1,42 @@
+ARG MCSV_NAME=mcsv-config-server
+ARG MCSV_FOLDER_ORIGEN=config-server
+
+FROM --platform=linux/x86_64  openjdk:17-jdk-alpine as builder
+RUN addgroup -S spring && adduser -S spring -G spring
+
+ARG MCSV_NAME
+ARG MCSV_FOLDER_ORIGEN
+
+#WORKDIR /app/mcsv-config-server
+WORKDIR /app/$MCSV_NAME
+
+#COPY ./pom.xml /app
+#COPY ./config-server/.mvn ./.mvn
+#COPY ./config-server/mvnw .
+#COPY ./config-server/pom.xml .
+
+COPY ./pom.xml /app
+COPY ./$MCSV_FOLDER_ORIGEN/.mvn ./.mvn
+COPY ./$MCSV_FOLDER_ORIGEN/mvnw .
+COPY ./$MCSV_FOLDER_ORIGEN/pom.xml .
+
+#RUN sed -i 's/\r$//' mvnw
+RUN ./mvnw dependency:go-offline
+COPY ./$MCSV_FOLDER_ORIGEN/src ./src
+
+RUN ./mvnw clean package -DskipTests
+
+FROM --platform=linux/x86_64  openjdk:17-jdk-alpine 
+ARG MCSV_NAME
+WORKDIR /app
+
+ARG TARGET_FOLDER=/app/$MCSV_NAME/target
+
+#COPY --from=builder /app/mcsv-config-server/target/config-server-0.0.2-SNAPSHOT.jar .
+COPY --from=builder $TARGET_FOLDER/config-server-0.0.2-SNAPSHOT.jar .
+
+ENV EUREKA_SERVER="http://mcsv-eureka-server:8761/eureka"
+EXPOSE 8888
+
+ENTRYPOINT ["java","-DskipTest","-jar","config-server-0.0.2-SNAPSHOT.jar","--eureka.client.serviceUrl.defaultZone=${EUREKA_SERVER}"]
+

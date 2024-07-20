@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  mcsv-config-server:
+    container_name: mcsv-config-server
+    image: config-server:1.0.1
+    # build:
+    #   context: ./
+    #   dockerfile: ./eureka-server/Dockerfile
+    ports:
+      - '8888:8888'
+    environment:
+      EUREKA_SERVER: "http://mcsv-eureka-server:8761/eureka"      
+    networks:
+      - spring
+    restart: always
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '1.0'
+    #       memory:  150M
+    #     reservations:
+    #       cpus: '0.5'
+    #       memory: 100M
+
+networks:
+  spring:
+    external: true
+    name: spring
