@@ -17,7 +17,7 @@ spring:
 
                     uri: https://github.com/TEAMS-DESARROLLO/file_config.git
                     username: 'crojasadicse'
-                    password: ${{MY_SECRET}}
+                    password: ${{secrets.MY_SECRET}}
                     clone-on-start: true
 
                 # la rama de git
