@@ -10,7 +10,7 @@ services:
       - '8888:8888'
     environment:
       EUREKA_SERVER: "http://mcsv-eureka-server:8761/eureka"      
-      
+      GH_SECRET: ${GH_SECRET}
     networks:
       - spring
     restart: always
